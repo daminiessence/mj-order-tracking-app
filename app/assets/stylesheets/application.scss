@@ -13,5 +13,7 @@
  * better to create a new file per style scope.
  *
  */
+
+@import "custom";
 @import "bootstrap-sprockets";
 @import "bootstrap";
