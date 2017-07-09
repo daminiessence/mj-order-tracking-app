@@ -1,0 +1,5 @@
+<li>
+  <p><strong>email: </strong><%= user.email %></p>
+  <p><%= link_to "delete", user_path(user), method: :delete,
+    data: { confirm: "Are you sure?" } %></p>
+</li>
