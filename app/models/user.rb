@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
     uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 7 }
-  attr_accessor :password_reset_token
+  attr_accessor :password_reset_token, :remember_me_token
   has_secure_password
 
   def self.digest(string)
@@ -26,5 +26,21 @@ class User < ApplicationRecord
 
   def send_password_reset_email
     UserMailer.password_reset(self).deliver_now
+  end
+
+  def remember
+    self.remember_me_token = User.new_token
+    update_attribute(:remember_me_token, User.digest(remember_me_token))
+  end
+
+  def forget
+    self.remember_me_token = nil
+    update_attribute(:remember_me_token, nil)
+  end
+
+  def authenticate_token?(token_type, token_value)
+    digest = send("#{token_type.to_s.remove("_token")}_digest")
+    return nil unless digest
+    BCrypt::Password.new(digest).is_password?(token_value)
   end
 end
