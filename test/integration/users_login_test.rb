@@ -27,4 +27,15 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_not flash.empty?
   end
+
+  test "login with remembering" do
+    log_in(@user, remember_me: "1")
+    assert_not_empty cookies["remember_me_token"]
+  end
+
+  test "login without remembering" do
+    log_in(@user, remember_me: "1")
+    log_in(@user, remember_me: "0")
+    assert_empty cookies["remember_me_token"]
+  end
 end
