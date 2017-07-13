@@ -1,0 +1,8 @@
+<%= form_for @user, url: password_resets_path(params[:id]) do |f| %>
+  <%= hidden_field_tag :email, @user.email %>
+  <%= f.label :password, "Password" %>
+  <%= f.password_field :password, class: "form-control" %>
+  <%= f.label :password_confirmation, "Password confirmation" %>
+  <%= f.password_field :password_confirmation, class: "form-control" %>
+  <%= f.submit "Update password", class: "btn btn-primary" %>
+<% end %>

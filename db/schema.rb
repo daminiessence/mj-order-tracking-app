@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(version: 20170708024228) do
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
+    t.string "password_reset_digest"
+    t.datetime "password_reset_sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
