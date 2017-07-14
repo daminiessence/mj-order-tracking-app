@@ -12,6 +12,10 @@ class ActiveSupport::TestCase
   def log_in(user)
     session[:user_id] = user.id
   end
+
+  def format(msg)
+    "\nMessage:\n#{msg}"
+  end
 end
 
 class ActionDispatch::IntegrationTest
