@@ -4,8 +4,20 @@
     <h1>Sign up</h1>
     <%= form_for @user do |f| %>
       <div class="form-group">
+        <%= f.label :first_name, "Given name" %>
+        <%= f.text_field :first_name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name, "Family name" %>
+        <%= f.text_field :last_name, class: "form-control" %>
+      </div>
+      <div class="form-group">
         <%= f.label :email, "Email" %>
         <%= f.text_field :email, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :agent_id, "Agent ID" %>
+        <%= f.text_field :agent_id, class: "form-control" %>
       </div>
       <div class="form-group">
         <%= f.label :password, "Password" %>

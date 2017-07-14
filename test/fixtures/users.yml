@@ -1,3 +1,40 @@
 faithess:
+  first_name: "Faithes"
+  last_name: "Atara"
   email: "fy@email.com"
+  agent_id: "1"
+  admin: true
   password_digest: <%= User.digest("password") %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+cglotr:
+  first_name: "Amir"
+  last_name: "Ariffin"
+  email: "cg@email.com"
+  agent_id: "2"
+  admin: true
+  password_digest: <%= User.digest("password") %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+inactive:
+  first_name: "John"
+  last_name: "Doe"
+  email: "jd@email.com"
+  agent_id: "3"
+  admin: false
+  password_digest: <%= User.digest("password") %>
+  activated: false
+  activated_at: <%= Time.zone.now %>
+
+<% [1..30].each do |n| %>
+user_<%= n %>:
+  first_name: <% "fn_#{n}" %>
+  last_name: <% "ln_#{n}" %>
+  email: <% "user_#{n}@email.com" %>
+  agent_id: <% "1.#{n}" %>
+  password_digest: <%= User.digest("password") %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+<% end %>

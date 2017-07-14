@@ -16,10 +16,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:success] = "Sign up done!"
+      flash[:success] = "TODO: Sign up done!"
       redirect_to root_url
     elsif
-      flash.now[:danger] = "Opps, something went wrong with your sign up..."
+      flash.now[:danger] = "TODO: Opps, something went wrong with your sign up..."
       render :new
     end
   end
@@ -39,6 +39,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :email, :agent_id,
+        :password, :password_confirmation)
     end
 end

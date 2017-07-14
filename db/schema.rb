@@ -13,9 +13,12 @@
 ActiveRecord::Schema.define(version: 20170708024228) do
 
   create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
     t.string "email"
-    t.string "password_digest"
+    t.boolean "admin", default: false
     t.string "remember_me_digest"
+    t.string "password_digest"
     t.string "password_reset_digest"
     t.datetime "password_reset_sent_at"
     t.string "agent_id"

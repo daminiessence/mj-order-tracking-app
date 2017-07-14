@@ -1,10 +1,9 @@
 <% provide(:title, "Profile") %>
-<h1>User profile</h1>
-<table>
-  <tr>
-    <th>email</th>
-  </tr>
-  <tr>
-    <td><%= @user.email %></td>
-  </tr>
-</table>
+<div class="row">
+  <div class="col-md-12">
+    <h1>User profile</h1>
+    <p>Name: <%= "#{@user.first_name} #{@user.last_name}" %></p>
+    <p>Email: <%= @user.email %></p>
+    <p>Agent ID: <%= @user.agent_id %></p>
+  </div>
+</div>
