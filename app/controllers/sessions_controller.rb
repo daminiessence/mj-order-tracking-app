@@ -8,7 +8,11 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       params[:session][:remember_me] == "1" ? remember(user) : forget(user)
-      flash[:success] = "TODO: login ok"
+      if user.agent_id
+        flash[:success] = "TODO: login ok"
+      else
+        flash[:warning] = "TODO: account not activated"
+      end
       redirect_back_or root_url
     else
       flash.now[:danger] = "TODO: login not ok"

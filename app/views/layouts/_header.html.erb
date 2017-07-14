@@ -2,10 +2,17 @@
   <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/">Mary Jardin</a>
+        <%= link_to "Mary Jardin", root_path, class: "navbar-brand" %>
       </div>
+      <ul class="nav navbar-nav navbar-left">
+        <% if logged_in? %>
+          <li><%= link_to "Users", users_path %></li>
+        <% else %>
+        <% end %>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
+          <li><%= link_to "Profile", user_path(current_user) %></li>
           <li><%= link_to "Log out", logout_path, method: :delete %></li>
         <% else %>
           <li><%= link_to "Sign up", signup_path %></li>

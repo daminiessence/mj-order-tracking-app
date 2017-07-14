@@ -18,6 +18,10 @@ ActiveRecord::Schema.define(version: 20170708024228) do
     t.string "remember_me_digest"
     t.string "password_reset_digest"
     t.datetime "password_reset_sent_at"
+    t.string "agent_id"
+    t.boolean "activated", default: false
+    t.datetime "activated_at"
+    t.string "activation_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

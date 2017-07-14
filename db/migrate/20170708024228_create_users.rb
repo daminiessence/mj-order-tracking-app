@@ -9,6 +9,12 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :password_reset_digest
       t.datetime :password_reset_sent_at
 
+      t.string :agent_id
+
+      t.boolean :activated, default: false
+      t.datetime :activated_at
+      t.string :activation_digest
+
       t.timestamps
     end
   end
