@@ -28,6 +28,16 @@ inactive:
   activated: false
   activated_at: <%= Time.zone.now %>
 
+non_agent:
+  first_name: "Non"
+  last_name: "Agent"
+  email: "na@email.com"
+  agent_id: ""
+  admin: true
+  password_digest: <%= User.digest("password") %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
 <% [1..30].each do |n| %>
 user_<%= n %>:
   first_name: <% "fn_#{n}" %>
