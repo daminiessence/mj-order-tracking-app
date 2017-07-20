@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :users
   resources :password_resets, only: [ :new, :create, :edit, :update ]
   resources :account_activations, only: [ :edit ]
+  resources :orders
+  resources :products
 
   root 'static_pages#home'
 end

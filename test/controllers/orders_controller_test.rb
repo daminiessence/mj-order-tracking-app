@@ -7,6 +7,11 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     @non_agent = users(:non_agent)
   end
 
+  test "should get index" do
+    get orders_path
+    assert_response :success
+  end
+
   test "agent can visit new" do
     log_in(@faithy)
     get new_order_path
