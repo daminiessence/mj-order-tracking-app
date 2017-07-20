@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
     uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 7 }
+  has_many :orders, primary_key: :agent_id, foreign_key: :agent_id
   attr_accessor :password_reset_token, :remember_me_token, :activation_token
   has_secure_password
 

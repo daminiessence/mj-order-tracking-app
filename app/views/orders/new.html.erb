@@ -1,0 +1,27 @@
+<% provide(:title, "Order") %>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <h1>Order</h1>
+    <%= form_for @order do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class="form-group">
+        <%= f.label :no, "No." %>
+        <%= f.number_field :no, class: "form-control" %>
+      </div>
+      <%= f.nested_fields_for :sales do |sf| %>
+        <%= sf.remove_nested_fields_link %>
+        <div class="form-group">
+          <%= sf.select(:product_sid, options_for_select(@products), class:
+            "form-control") %>
+        </div>
+        <div class="form-group">
+          <%= sf.label :sale, "Sale (RM)" %>
+          <%= sf.number_field :sale, class: "form-control", step: 0.01,
+            placeholder: "Custom value (optional)" %>
+        </div>
+      <% end %>
+      <%= f.add_nested_fields_link :sales %>
+      <%= f.submit "Create", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

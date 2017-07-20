@@ -1,0 +1,20 @@
+<p>Products</p>
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Suggested Price</th>
+    <th># of Sales</th>
+    <th>Total Sales</th>
+  </tr>
+  <% @products.each do |product| %>
+    <tr>
+      <% sales = Sale.where(product_sid: product.sid) %>
+      <td><%= link_to product.sid, product_path(product) %></td>
+      <td><%= link_to product.name, product_path(product) %></td>
+      <td>RM <%= product.suggested_price %></td>
+      <td><%= sales.count %></td>
+      <td><%= sales.sum(&:sale) %></td>
+    </tr>
+  <% end %>
+</table>
