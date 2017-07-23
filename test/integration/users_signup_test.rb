@@ -4,8 +4,10 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
   def setup
     ActionMailer::Base.deliveries.clear
-    @user = User.new(email: "test@test.com", password: "1234567",
-      password_confirmation: "1234567")
+    @user = User.new(first_name: "Test", last_name: "Test",
+      email: "test@test.com",
+      agent_id: "1.999",
+      password: "password", password_confirmation: "password")
   end
 
   test "should be valid" do
@@ -24,8 +26,14 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   test "user signup" do
     get signup_path
     assert_difference "User.count", 1 do
-      post users_path, params: { user: { email: @user.email, password:
-        "1234567", password_confirmation: "1234567" } }
+      post users_path, params: {
+        user: {
+          email: @user.email,
+          agent_id: "99.99.99",
+          password: "1234567",
+          password_confirmation: "1234567"
+        }
+      }
     end
     assert_equal 1, ActionMailer::Base.deliveries.size
     user = assigns(:user)

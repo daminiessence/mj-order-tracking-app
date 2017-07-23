@@ -55,4 +55,13 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = "a" * 6
     assert_not @user.valid?
   end
+
+  test "agent_id should be of valid format" do
+    assert @user.valid?
+    invalid_agent_ids = [ "faithess.atarah", "1.", "1.a", "a.1", "00.1", "-1", "1..0" ]
+    invalid_agent_ids.each do |invalid_agent_id|
+      @user.agent_id = invalid_agent_id
+      assert_not @user.valid?
+    end
+  end
 end

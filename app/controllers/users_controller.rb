@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    add_breadcrumb "signup", signup_path
   end
 
   def create
@@ -43,7 +44,9 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :agent_id,
+      params.require(:user).permit(:first_name, :last_name,
+        :email,
+        :agent_id,
         :password, :password_confirmation)
     end
 

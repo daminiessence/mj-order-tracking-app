@@ -1,9 +1,21 @@
 class User < ApplicationRecord
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
+  VALID_AGENT_ID_REGEX = /(^\d+$|^(\d+\.)+\d+$)/
+
+  validates :email,
+    presence: true,
+    format: { with: VALID_EMAIL_REGEX },
     uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 7 }
+  validates :password,
+    presence: true,
+    length: { minimum: 7 }
+  validates :agent_id,
+    presence: true,
+    length: { minimum: 1 },
+    format: { with: VALID_AGENT_ID_REGEX },
+    uniqueness: true
+
   has_many :orders, primary_key: :agent_id, foreign_key: :agent_id
   attr_accessor :password_reset_token, :remember_me_token, :activation_token
   has_secure_password
