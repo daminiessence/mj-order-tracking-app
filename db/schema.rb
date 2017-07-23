@@ -14,11 +14,10 @@ ActiveRecord::Schema.define(version: 20170716180412) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "no"
-    t.integer "user_id"
+    t.string "agent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["no"], name: "index_orders_on_no"
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["no"], name: "index_orders_on_no", unique: true
   end
 
   create_table "products", force: :cascade do |t|
@@ -34,7 +33,8 @@ ActiveRecord::Schema.define(version: 20170716180412) do
   create_table "sales", force: :cascade do |t|
     t.integer "order_no"
     t.string "product_sid"
-    t.decimal "sale", precision: 8, scale: 2
+    t.decimal "sale_price", precision: 8, scale: 2
+    t.integer "amount", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_no"], name: "index_sales_on_order_no"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20170716180412) do
     t.string "activation_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_users_on_agent_id"
   end
 
 end

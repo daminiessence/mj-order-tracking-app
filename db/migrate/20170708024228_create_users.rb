@@ -13,12 +13,12 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.datetime :password_reset_sent_at
 
       t.string :agent_id
-
       t.boolean :activated, default: false
       t.datetime :activated_at
       t.string :activation_digest
 
       t.timestamps
     end
+    add_index :users, :agent_id
   end
 end

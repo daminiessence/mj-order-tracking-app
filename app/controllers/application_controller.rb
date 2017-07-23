@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
   include SessionsHelper
   protect_from_forgery with: :exception
+  add_breadcrumb "home", :root_path
 
   def logged_in_user
     unless logged_in?
