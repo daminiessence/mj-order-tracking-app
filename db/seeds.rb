@@ -1,5 +1,27 @@
-User.create!(first_name: "Faithes", last_name: "Atara", email: "fy@email.com", admin: true,
-  password: "password", password_confirmation: "password", agent_id: "1", activated: true)
+User.create!(first_name: "Faithes", last_name: "Atara",
+  email: "fy@email.com",
+  agent_id: "1",
+  admin: true,
+  activated: true,
+  password: "password", password_confirmation: "password")
+User.create!(first_name: "Yuuko", last_name: "Aioi",
+  email: "ya@email.com",
+  agent_id: "1.1",
+  admin: false,
+  activated: true,
+  password: "password", password_confirmation: "password")
+User.create!(first_name: "Mio", last_name: "Naganohara",
+  email: "mn@email.com",
+  agent_id: "1.2",
+  admin: false,
+  activated: true,
+  password: "password", password_confirmation: "password")
+User.create!(first_name: "Mai", last_name: "Minakami",
+  email: "mai@email.com",
+  agent_id: "1.3",
+  admin: false,
+  activated: true,
+  password: "password", password_confirmation: "password")
 
 Product.create!(sid: "MJ000-001",
   name: "LAVENDER GARDEN FULL SET",

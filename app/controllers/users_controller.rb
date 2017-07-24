@@ -4,12 +4,15 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
   before_action :correct_user, only: [ :edit, :update ]
 
+  add_breadcrumb "users", :users_path
+
   def index
     @users = User.all
   end
 
   def show
     @user = User.find_by id: params[:id]
+    add_breadcrumb "#{@user.first_name.downcase}", user_path(@user)
   end
 
   def new
@@ -30,9 +33,17 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find_by(id: params[:id])
   end
 
   def update
+    if @user.update_attributes(user_params)
+      flash[:success] = "TODO: update success"
+      redirect_to user_path(@user)
+    else
+      flash.now[:danger] = "TODO: update failed"
+      render :new
+    end
   end
 
   def destroy
@@ -48,10 +59,6 @@ class UsersController < ApplicationController
         :email,
         :agent_id,
         :password, :password_confirmation)
-    end
-
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
     end
 
     def correct_user
