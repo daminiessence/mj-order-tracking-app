@@ -1,8 +1,15 @@
 class User < ApplicationRecord
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  VALID_AGENT_ID_REGEX = /(^\d+$|^(\d+\.)+\d+$)/
+  VALID_AGENT_ID_REGEX = /(^(0|[1-9][0-9]*)$|^((0|[1-9][0-9]*)\.)+(0|[1-9][0-9]*)$)/
+  VALID_NAME_REGEX = /\A\w+$\z/
 
+  validates :first_name,
+    presence: true,
+    format: { with: VALID_NAME_REGEX }
+  validates :last_name,
+    presence: true,
+    format: { with: VALID_NAME_REGEX }
   validates :email,
     presence: true,
     format: { with: VALID_EMAIL_REGEX },
@@ -16,13 +23,16 @@ class User < ApplicationRecord
     format: { with: VALID_AGENT_ID_REGEX },
     uniqueness: true
 
-  has_many :orders, primary_key: :agent_id, foreign_key: :agent_id
+  has_many :orders,
+    primary_key: :agent_id,
+    foreign_key: :agent_id
+
   attr_accessor :password_reset_token, :remember_me_token, :activation_token
+
   has_secure_password
 
   def self.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ?
-      BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
@@ -32,8 +42,7 @@ class User < ApplicationRecord
 
   def create_password_reset_digest
     self.password_reset_token = User.new_token
-    update_attribute(:password_reset_digest,
-      User.digest(password_reset_token))
+    update_attribute(:password_reset_digest, User.digest(password_reset_token))
     update_attribute(:password_reset_sent_at, Time.zone.now)
   end
 

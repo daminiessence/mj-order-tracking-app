@@ -1,13 +1,49 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+
   def setup
-    @user = User.new email: "faithy@email.com", password: "1234567",
-      password_confirmation: "1234567"
+    @user = User.new first_name: "Fai", last_name: "Atara",
+      email: "faithy@email.com",
+      agent_id: "999",
+      password: "password",
+      password_confirmation: "password"
   end
 
   test "should be valid" do
     assert @user.valid?
+  end
+
+  test "first_name should not have leading and trailing whitespaces" do
+    f_names = [ " Fyyy", "Fyyy ", " Fyyy " ]
+    f_names.each do |fn|
+      @user.first_name = fn
+      assert_not @user.valid?
+    end
+  end
+
+  test "first_name should be present and valid" do
+    invalid_first_names = [ nil, "", " " ]
+    invalid_first_names.each do |fn|
+      @user.first_name = fn
+      assert_not @user.valid?
+    end
+  end
+
+  test "last_name should not have leading and trailing whitespaces" do
+    l_names = [ " Atarah", "Atarah ", " Atara " ]
+    l_names.each do |ln|
+      @user.last_name = ln
+      assert_not @user.valid?
+    end
+  end
+
+  test "last_name should be present and valid" do
+    invalid_last_names = [ nil, "", " " ]
+    invalid_last_names.each do |ln|
+      @user.last_name = ln
+      assert_not @user.valid?
+    end
   end
 
   test "email should be present" do
@@ -36,12 +72,12 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "email should be unique" do
-    diff_pass = @user.password + "abc"
-    another_user = User.new(password: diff_pass,
-      password_confirmation: diff_pass)
-    another_user.email = @user.email
-    @user.save
+    assert @user.save
+    another_user = @user.dup
+    another_user.agent_id += ".1"
     assert_not another_user.valid?
+    another_user.email += ".ca"
+    assert another_user.valid?
   end
 
   test "password should be present" do
@@ -56,12 +92,25 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "agent_id should be present" do
+    @user.agent_id = nil
+    assert_not @user.valid?
+  end
+
   test "agent_id should be of valid format" do
-    assert @user.valid?
     invalid_agent_ids = [ "faithess.atarah", "1.", "1.a", "a.1", "00.1", "-1", "1..0" ]
     invalid_agent_ids.each do |invalid_agent_id|
       @user.agent_id = invalid_agent_id
       assert_not @user.valid?
     end
+  end
+
+  test "agent_id should be unique" do
+    assert @user.save
+    another_agent = @user.dup
+    another_agent.email += ".ca"
+    assert_not another_agent.valid?
+    another_agent.agent_id += ".1"
+    assert another_agent.valid?
   end
 end
