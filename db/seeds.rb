@@ -22,6 +22,12 @@ User.create!(first_name: "Mai", last_name: "Minakami",
   admin: false,
   activated: true,
   password: "password", password_confirmation: "password")
+User.create!(first_name: "Nano", last_name: "Shinonome",
+  email: "ns@email.com",
+  agent_id: "1.3.1",
+  admin: false,
+  activated: true,
+  password: "password", password_confirmation: "password")
 
 Product.create!(sid: "MJ000-001",
   name: "LAVENDER GARDEN FULL SET",

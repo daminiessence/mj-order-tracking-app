@@ -15,6 +15,9 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "All", users_path %></li>
+              <li>
+                <%= link_to "Agent Verification", user_agent_verifications_path(current_user) %>
+              </li>
             </ul>
           </li>
 
