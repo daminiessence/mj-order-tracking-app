@@ -55,6 +55,10 @@ class User < ApplicationRecord
     update_attribute(:remember_me_token, User.digest(remember_me_token))
   end
 
+  def verify
+    update_attribute(:verified_agent, true) && update_attribute(:verified_at, Time.zone.now)
+  end
+
   def forget
     self.remember_me_token = nil
     update_attribute(:remember_me_token, nil)

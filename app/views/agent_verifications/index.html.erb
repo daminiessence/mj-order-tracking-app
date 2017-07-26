@@ -1,6 +1,42 @@
-<h1>Pending Agents</h1>
-<ul>
-  <% @agents.each do |agent| %>
-    <li><%= agent.agent_id %></li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Agents Pending Your Verification</h3>
+      </div>
+      <div class="panel-body">
+        <p>Below are agents waiting for your verification. Click on <span class="text-success">
+          verify</span> to confirm that the agent's ID is correct. If any of the agents below is
+          not under you, click on <span class="text-danger">delete</span> to deny the agent's
+          account.</p>
+      </div>
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Agent ID?</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <% @unverified_agents.each do |u_agent| %>
+          <tr>
+            <td><%= u_agent.first_name %></td>
+            <td><%= u_agent.last_name %></td>
+            <td><%= u_agent.agent_id %></td>
+            <td>
+              <%= link_to "verify", user_agent_verification_path(user_id: current_user.id,
+                id: u_agent.id), method: :patch,
+                data: { confirm: "Verify #{u_agent.first_name}?" },
+                class: "text-success" %>
+            </td>
+            <td>
+              <%= link_to "delete", user_path(u_agent.id), method: :delete,
+                data: { confirm: "This will delete #{u_agent.first_name}. Are you sure?" },
+                class: "text-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 20170716180412) do
     t.string "password_reset_digest"
     t.datetime "password_reset_sent_at"
     t.string "agent_id"
+    t.boolean "verified_agent", default: false
+    t.datetime "verified_at"
     t.boolean "activated", default: false
     t.datetime "activated_at"
     t.string "activation_digest"
