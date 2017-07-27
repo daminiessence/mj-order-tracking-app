@@ -1,62 +1,68 @@
 <header>
-  <nav class="navbar navbar-default navbar-static-top">
-    <div class="container">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
       <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#data-target" aria-expanded="false">
+          <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+        </button>
         <%= link_to "Mary Jardin", root_path, class: "navbar-brand" %>
       </div>
-      <ul class="nav navbar-nav navbar-left">
-        <% if logged_in? %>
+      <div class="collapse navbar-collapse" id="data-target">
+        <ul class="nav navbar-nav navbar-left">
+          <% if logged_in? %>
 
-          <!-- Users dropdown. -->
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-              role="button" aria-haspopup="true" aria-expanded="false">
-              Users <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "All", users_path %></li>
-              <li>
-                <%= link_to "Agent Verification", user_agent_verifications_path(current_user) %>
-              </li>
-            </ul>
-          </li>
+            <!-- Users dropdown. -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                role="button" aria-haspopup="true" aria-expanded="false">
+                Users <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "All", users_path %></li>
+                <li>
+                  <%= link_to "Agent Verification", user_agent_verifications_path(current_user) %>
+                </li>
+              </ul>
+            </li>
 
-          <!-- Orders dropdown. -->
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-              role="button" aria-haspopup="true" aria-expanded="false">
-              Orders <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "New", new_order_path %></li>
-              <li><%= link_to "View", orders_path %></li>
-            </ul>
-          </li>
+            <!-- Orders dropdown. -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                role="button" aria-haspopup="true" aria-expanded="false">
+                Orders <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "New", new_order_path %></li>
+                <li><%= link_to "View", orders_path %></li>
+              </ul>
+            </li>
 
-          <!-- Products dropdown. -->
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-              role="button" aria-haspopup="true" aria-expanded="false">
-              Products <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "New", new_product_path %></li>
-              <li><%= link_to "View", products_path %></li>
-            </ul>
-          </li>
+            <!-- Products dropdown. -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                role="button" aria-haspopup="true" aria-expanded="false">
+                Products <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "New", new_product_path %></li>
+                <li><%= link_to "View", products_path %></li>
+              </ul>
+            </li>
 
-        <% else %>
-        <% end %>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <% if logged_in? %>
-          <li><%= link_to "Profile", user_path(current_user) %></li>
-          <li><%= link_to "Log out", logout_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to "Sign up", signup_path %></li>
-          <li><%= link_to "Log in", login_path %></li>
-        <% end %>
-      </ul>
+          <% else %>
+          <% end %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if logged_in? %>
+            <li><%= link_to "Profile", user_path(current_user) %></li>
+            <li><%= link_to "Log out", logout_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to "Sign up", signup_path %></li>
+            <li><%= link_to "Log in", login_path %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </nav>
 </header>
