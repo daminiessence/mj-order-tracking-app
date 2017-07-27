@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   add_breadcrumb "orders", :orders_path
 
   def index
+    flash[:success] = "TODO: test"
     @orders = Order.where(agent_id: current_user.agent_id) || []
   end
 
