@@ -1,0 +1,5 @@
+soap:
+  sid: "PROD001"
+  name: "Soap"
+  description: "Soap for your face."
+  suggested_price: 10.00
