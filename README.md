@@ -1,24 +1,29 @@
-# README
+# Mary Jardin Order Tracking App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ordering app meant to be used for agent based ordering network like Mary Jardin. I am not affiliated
+to Mary Jardin. This app is just me trying to learn how to develop web app in Rails. This app is
+still a work in progress.
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+### Prerequisites
 
-* System dependencies
+Install [PostgreSQL](https://www.postgresql.org/) database to your machine to run the app locally.
 
-* Configuration
+### Installing
 
-* Database creation
+Clone to this repository and run ```bundle install``` to install all the gems needed. Change the
+```username``` and ```password``` for Postgres database in ```secrets.yml``` file.
 
-* Database initialization
+Run ```rails server``` and visit ```localhost:3000``` in your favorite browser.
 
-* How to run the test suite
+## Running the tests
 
-* Services (job queues, cache servers, search engines, etc.)
+Execute ```rails test``` to run all of the test cases. Note: some test cases will fail since this
+app is a work in progress.
 
-* Deployment instructions
+## Contributing
 
-* ...
+## License
+
+## Acknowledgments
