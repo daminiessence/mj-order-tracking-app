@@ -7,20 +7,20 @@
     <th>Total Sales (RM)</th>
     <% if current_user.admin? %>
       <th></th>
-      <th></th>
     <% end %>
   </tr>
   <% @orders.each do |order| %>
     <tr>
       <% user = User.find_by(agent_id: order.agent_id) %>
       <% sales = Sale.where(order_no: order.no) %>
-      <td><%= link_to "#" + order.no.to_s, order_path(order) %></td>
+      <td><%= link_to order.formatted_no, order_path(order) %></td>
       <td><%= link_to user.agent_id, user_path(user) %></td>
       <td><%= sales.count > 0 ? sales.sum(&:amount) : 0 %></td>
       <td>RM <%= sales.count > 0 ? sales.sum(&:sale_price) : 0.00 %></td>
       <% if current_user.admin? %>
-        <td><%= link_to "edit", edit_order_path(order) %></td>
-        <td><%= link_to "delete", order_path(order), method: :delete %></td>
+        <td><%= link_to "delete", order_path(order),
+          method: :delete,
+          data: { confirm: "Delete order no. #{order.formatted_no}?" } %></td>
       <% end %>
     </tr>
   <% end %>

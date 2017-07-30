@@ -53,7 +53,7 @@ unverified_agent:
   activated: false
   activated_at: <%= Time.zone.now %>
 
-<% [1..30].each do |n| %>
+<% (1..30).each do |n| %>
 agent_<%= n %>:
   first_name: "Dummy"
   last_name: "Agent"

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
   resources :password_resets, only: [ :new, :create, :edit, :update ]
   resources :account_activations, only: [ :edit ]
-  resources :orders
+  resources :orders, only: [ :index, :show, :new, :create, :destroy ]
   resources :products
 
   root 'static_pages#home'

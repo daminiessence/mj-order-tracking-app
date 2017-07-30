@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
 
   before_action :logged_in_user
-  before_action :agent_user
+  before_action :agent_user, except: :destroy
   before_action :admin_user, only: [ :destroy ]
+
   add_breadcrumb "orders", :orders_path
 
   def index
@@ -11,7 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find_by(no: params[:id])
+    @order = Order.find_by(id: params[:id])
     @user = User.find_by(agent_id: @order.agent_id)
     @sales = []
     Sale.where(order_no: @order.no).each do |sale|
@@ -35,14 +36,6 @@ class OrdersController < ApplicationController
       @products = product_selection
       render :new
     end
-  end
-
-  def edit
-    @order = Order.find_by(id: params[:id])
-    @sales = @order.sales.all
-  end
-
-  def update
   end
 
   def destroy
