@@ -46,6 +46,9 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+    Order.find(params[:id]).destroy
+    flash[:success] = "TODO: the order is destroyed"
+    redirect_to orders_url
   end
 
   private

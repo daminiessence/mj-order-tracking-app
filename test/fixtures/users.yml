@@ -1,51 +1,67 @@
-faithess:
+admin:
   first_name: "Faithes"
   last_name: "Atara"
   email: "fy@email.com"
-  agent_id: "1"
-  verified_agent: true
   admin: true
   password_digest: <%= User.digest("password") %>
+  agent_id: "1"
+  verified_agent: true
   activated: true
   activated_at: <%= Time.zone.now %>
 
-cglotr:
-  first_name: "Amir"
-  last_name: "Ariffin"
-  email: "cg@email.com"
+agent:
+  first_name: "Yuuko"
+  last_name: "Aioi"
+  email: "yuuko@email.com"
+  admin: false
+  password_digest: <%= User.digest("password") %>
   agent_id: "2"
-  admin: false
-  password_digest: <%= User.digest("password") %>
+  verified_agent: true
   activated: true
   activated_at: <%= Time.zone.now %>
 
-inactive:
-  first_name: "John"
-  last_name: "Doe"
-  email: "jd@email.com"
-  agent_id: "3"
+child_agent:
+  first_name: "Mio"
+  last_name: "Naganohara"
+  email: "mio@email.com"
   admin: false
   password_digest: <%= User.digest("password") %>
+  agent_id: "2.1"
+  verified_agent: true
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+unverified_child_agent:
+  first_name: "Mai"
+  last_name: "Minakami"
+  email: "mai@email.com"
+  admin: false
+  password_digest: <%= User.digest("password") %>
+  agent_id: "2.2"
+  verified_agent: false
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+unverified_agent:
+  first_name: "Nano"
+  last_name: "Shinonome"
+  email: "nano@email.com"
+  admin: false
+  password_digest: <%= User.digest("password") %>
+  agent_id: "3"
+  verified_agent: false
   activated: false
   activated_at: <%= Time.zone.now %>
 
-non_agent:
-  first_name: "Non"
-  last_name: "Agent"
-  email: "na@email.com"
-  agent_id: ""
-  admin: true
-  password_digest: <%= User.digest("password") %>
-  activated: true
-  activated_at: <%= Time.zone.now %>
-
 <% [1..30].each do |n| %>
-user_<%= n %>:
-  first_name: <% "fn_#{n}" %>
-  last_name: <% "ln_#{n}" %>
-  email: <% "user_#{n}@email.com" %>
-  agent_id: <% "1.#{n}" %>
+agent_<%= n %>:
+  first_name: "Dummy"
+  last_name: "Agent"
+  email: "dummy_<%= n %>@email.com"
+  admin: false
   password_digest: <%= User.digest("password") %>
+  agent_id: "1.<%= n %>"
+  verified_agent: true
   activated: true
   activated_at: <%= Time.zone.now %>
 <% end %>

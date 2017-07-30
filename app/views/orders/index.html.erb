@@ -5,6 +5,10 @@
     <th>Agent ID</th>
     <th>Amount Sold</th>
     <th>Total Sales (RM)</th>
+    <% if current_user.admin? %>
+      <th></th>
+      <th></th>
+    <% end %>
   </tr>
   <% @orders.each do |order| %>
     <tr>
@@ -14,6 +18,10 @@
       <td><%= link_to user.agent_id, user_path(user) %></td>
       <td><%= sales.count > 0 ? sales.sum(&:amount) : 0 %></td>
       <td>RM <%= sales.count > 0 ? sales.sum(&:sale_price) : 0.00 %></td>
+      <% if current_user.admin? %>
+        <td><%= link_to "edit", edit_order_path(order) %></td>
+        <td><%= link_to "delete", order_path(order), method: :delete %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>

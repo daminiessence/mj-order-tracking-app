@@ -3,7 +3,7 @@ require 'test_helper'
 class SaleTest < ActiveSupport::TestCase
 
   def setup
-    @user = users(:faithess)
+    @user = users(:admin)
     @product = products(:soap)
     @order = @user.orders.build(no: 999)
     @order.save

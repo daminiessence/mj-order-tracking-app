@@ -11,6 +11,9 @@ gem 'rails', '~> 5.1.2'
 
 gem 'pg'
 
+# Automatically kill Postgres connections during db:reset.
+gem 'pgreset'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets

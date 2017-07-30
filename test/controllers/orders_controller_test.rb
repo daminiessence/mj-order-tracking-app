@@ -3,9 +3,9 @@ require 'test_helper'
 class OrdersControllerTest < ActionDispatch::IntegrationTest
 
   def setup
-    @agent = users(:faithess)
+    @agent = users(:admin)
     log_in(@agent)
-    @non_agent = users(:non_agent)
+    @non_agent = users(:unverified_agent)
   end
 
   test "should get index" do
@@ -52,5 +52,8 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
         sale_price: 99.99, amount: 1)
       sale.save
     end
+  end
+
+  test "non admin could not destroy" do
   end
 end
