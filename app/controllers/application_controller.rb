@@ -13,9 +13,12 @@ class ApplicationController < ActionController::Base
   end
 
   def agent_user
-    if current_user.agent_id.blank?
-      flash[:danger] = "TODO: please register as an agent to continue"
-      redirect_to edit_user(current_user)
+    unless current_user.verified_agent?
+      parent_agent_id = current_user.agent_id.gsub(/\.\d+\z/, "")
+      p_agent = User.find_by(agent_id: parent_agent_id)
+      flash[:danger] = "You are not a verified agent! Please ask #{p_agent.first_name} "\
+        "#{p_agent.last_name} (ID: #{p_agent.agent_id}) to verify your ID before continuing."
+      redirect_back_or(root_url)
     end
   end
 

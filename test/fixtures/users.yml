@@ -3,6 +3,7 @@ faithess:
   last_name: "Atara"
   email: "fy@email.com"
   agent_id: "1"
+  verified_agent: true
   admin: true
   password_digest: <%= User.digest("password") %>
   activated: true

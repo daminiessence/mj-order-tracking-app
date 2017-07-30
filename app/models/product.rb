@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
 
-  has_many :sales, primary_key: :sid, foreign_key: :product_sid
+  has_many :sales, primary_key: :sid, foreign_key: :product_sid, inverse_of: :product
 
   validates :sid,
     presence: true,

@@ -22,33 +22,17 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order = Order.new
-    @products = []
-    Product.all.each do |product|
-      @products << [ "#{product.name} (ID: #{product.sid}, RM #{product.suggested_price})",
-        product.sid ]
-    end
+    @order ||= Order.new
+    @products = product_selection
     add_breadcrumb "new", new_order_path
   end
 
   def create
-    if order_params[:sales_attributes]
-      order = current_user.orders.create(no: order_params[:no])
-      order_params[:sales_attributes].each do |key, value|
-        product = Product.find_by(sid: value[:product_sid])
-        sale_price = (value[:sale_price].is_a? Numeric) ? value[:sale_price] :
-          product.suggested_price
-        sale = Sale.create(order_no: order.no, product_sid: value[:product_sid], sale_price:
-          sale_price, amount: value[:amount].to_i)
-      end
-    else
-      order = current_user.orders.build(order_params)
-    end
-    if order.save
-      flash[:success] = "TODO: ok"
+    @order = current_user.orders.build(order_params)
+    if @order.save
       redirect_to orders_url
     else
-      flash.now[:danger] = "TODO: error!"
+      @products = product_selection
       render :new
     end
   end
@@ -68,5 +52,16 @@ class OrdersController < ApplicationController
 
     def order_params
       params.require(:order).permit(:no, sales_attributes: [ :product_sid, :sale_price, :amount ])
+    end
+
+    def product_selection
+      p_selection = []
+      Product.all.each do |product|
+        p_selection << [
+          "#{product.name} (ID: #{product.sid}, RM #{product.suggested_price})",
+          product.sid
+        ]
+      end
+      p_selection
     end
 end

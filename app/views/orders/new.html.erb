@@ -1,5 +1,6 @@
 <% provide(:title, "New | Orders") %>
 <%= form_for @order do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <div class="panel panel-default">
     <div class="panel-heading"><h3 class="panel-title">New Order</h3></div>
     <div class="panel-body">
@@ -42,7 +43,8 @@
       <%= f.nested_fields_for :sales, wrapper_tag: :tr do |sf| %>
         <td>
           <div class="form-group">
-            <%= sf.select(:product_sid, options_for_select(@products), {}, class: "form-control") %>
+            <%= sf.select(:product_sid, options_for_select(@products, sf.object.product_sid), {},
+              class: "form-control") %>
           </div>
         </td>
         <td>
