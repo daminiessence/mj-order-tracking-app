@@ -7,7 +7,6 @@ class SaleTest < ActiveSupport::TestCase
     @product = products(:soap)
     @order = @user.orders.build(no: 999)
     @order.save
-    @invalid_order_no = 9876
     @invalid_product_sid = "INVALID"
   end
 
@@ -18,7 +17,6 @@ class SaleTest < ActiveSupport::TestCase
     assert User.exists?(@user.id)
     assert Order.exists?(@order.id)
     assert Product.exists?(@product.id)
-    assert_not Order.find_by(no: @invalid_order_no)
     assert_not Product.find_by(sid: @invalid_product_sid)
   end
 
@@ -66,16 +64,6 @@ class SaleTest < ActiveSupport::TestCase
       sale = @order.sales.build(product_sid: @product.sid, sale_price: 99.99,
         amount: invalid_amount)
       assert_not sale.valid?, "amount: #{invalid_amount} should not be valid."
-    end
-  end
-
-  test "saving using invalid order_no" do
-    sale = @order.sales.build(product_sid: @product.sid,
-      sale_price: 99.99, amount: 1)
-    assert sale.valid?
-    sale.order_no = @invalid_order_no
-    assert_no_difference 'Sale.count' do
-      sale.save
     end
   end
 

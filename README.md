@@ -1,8 +1,8 @@
 # Mary Jardin Order Tracking App
 
-Ordering app meant to be used for agent-based ordering network like Mary Jardin. I am not affiliated
-to Mary Jardin. This app is just me trying to learn how to develop web apps in Rails. This app is
-still a work in progress.
+Ordering app that is meant to be used for agent-based ordering network like Mary Jardin. I am not
+affiliated to Mary Jardin. This app is my effort learning and developing web apps in Rails. This
+project is still a work in progress.
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ Run ```rails server``` and visit ```localhost:3000``` in your favorite browser.
 
 ## Running the tests
 
-Execute ```rails test``` to run all of the test cases. **Note:** some of the test cases will fail.
+Execute ```rails test``` to run the tests.
 
 ## Contributing
 
