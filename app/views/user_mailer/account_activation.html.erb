@@ -1,4 +1,10 @@
 <h1>Account activation</h1>
-<p><span>email: </span><%= @user.email %></p>
-<%= link_to "Activate account",
-  edit_account_activation_url(@user.activation_token, email: @user.email) %>
+<p>Hi <%= @user.first_name %>,</p>
+<p>You have recently created an account with us. Please click on this
+  <span>
+    <%= link_to "link",
+      edit_account_activation_url(@user.activation_token, email: @user.email) %>
+  </span> to activate your account.
+</p>
+<br>
+<p>Have a nice day.</p>
