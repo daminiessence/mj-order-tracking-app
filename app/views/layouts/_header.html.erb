@@ -1,6 +1,7 @@
 <header>
   <nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <div class="container">
+
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
           data-target="#data-target" aria-expanded="false">
@@ -8,6 +9,7 @@
         </button>
         <%= link_to "Mary Jardin", root_path, class: "navbar-brand" %>
       </div>
+
       <div class="collapse navbar-collapse" id="data-target">
         <ul class="nav navbar-nav navbar-left">
           <% if logged_in? %>
@@ -58,8 +60,8 @@
             <li><%= link_to "Profile", user_path(current_user) %></li>
             <li><%= link_to "Log out", logout_path, method: :delete %></li>
           <% else %>
-            <li><%= link_to "Sign up", signup_path %></li>
-            <li><%= link_to "Log in", login_path %></li>
+            <%= link_to "Sign up", signup_path, class: "btn btn-primary navbar-btn" %>
+            <%= link_to "Log in", login_path, class: "btn btn-default navbar-btn" %>
           <% end %>
         </ul>
       </div>

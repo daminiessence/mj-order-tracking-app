@@ -1,23 +1,31 @@
 <% provide(:title, "Log In") %>
+
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
-    <h1>Log in</h1>
-    <%= form_with scope: :session, url: login_path, method: :post do |f| %>
-      <div class="form-group">
-        <%= f.label :email, "Email" %>
-        <%= f.text_field :email, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password, "Password" %>
-        <%= f.password_field :password, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :remember_me, class: "checkbox inline" do %>
-          <%= f.check_box :remember_me %>
-          <span>Remember login info?</span>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>Log in</h3>
+
+        <hr>
+
+        <%= form_with scope: :session, url: login_path, method: :post do |f| %>
+          <div class="form-group">
+            <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
+          </div>
+          <div class="form-group">
+            <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :remember_me do %>
+              <%= f.check_box :remember_me %>
+              <span>Remember me?</span>
+            <% end %>
+          </div>
+
+          <%= f.submit "Log in", class: "btn btn-primary" %>
         <% end %>
       </div>
-      <%= f.submit "Log in", class: "btn btn-primary" %>
-    <% end %>
+    </div>
   </div>
 </div>

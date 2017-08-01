@@ -6,15 +6,17 @@
     <th>Suggested Price</th>
     <th># of Sales</th>
     <th>Total Sales</th>
+    <th></th>
   </tr>
   <% @products.each do |product| %>
     <tr>
       <% sales = Sale.where(product_sid: product.sid) %>
-      <td><%= link_to product.sid, product_path(product) %></td>
-      <td><%= link_to product.name, product_path(product) %></td>
-      <td>RM <%= product.suggested_price %></td>
+      <td><%= product.sid %></td>
+      <td><%= product.name %></td>
+      <td><%= product.formatted_suggested_price %></td>
       <td><%= sales.count %></td>
       <td><%= sales.sum(&:sale) %></td>
+      <td><%= link_to "details", product_path(product) %></td>
     </tr>
   <% end %>
 </table>

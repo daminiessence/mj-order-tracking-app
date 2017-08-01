@@ -1,34 +1,42 @@
 <% provide(:title, "Sign up") %>
+
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
-    <h1>Sign up</h1>
-    <%= form_for @user do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-      <div class="form-group">
-        <%= f.label :first_name, "Given name" %>
-        <%= f.text_field :first_name, class: "form-control" %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>Sign up</h3>
+
+        <hr>
+
+        <%= form_for @user do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+
+          <div class="form-group">
+            <%= f.text_field :first_name, class: "form-control", placeholder: "Given name" %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :last_name, class: "form-control", placeholder: "Family name" %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :agent_id, class: "form-control", placeholder: "Agent ID" %>
+          </div>
+
+          <hr>
+
+          <div class="form-group">
+            <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+          </div>
+          <div class="form-group">
+            <%= f.password_field :password_confirmation, class: "form-control",
+              placeholder: "Password confirmation" %>
+          </div>
+
+          <%= f.submit "Sign up", class: "btn btn-primary" %>
+        <% end %>
       </div>
-      <div class="form-group">
-        <%= f.label :last_name, "Family name" %>
-        <%= f.text_field :last_name, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :email, "Email" %>
-        <%= f.text_field :email, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :agent_id, "Agent ID" %>
-        <%= f.text_field :agent_id, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password, "Password" %>
-        <%= f.password_field :password, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password_confirmation, "Confirm password" %>
-        <%= f.password_field :password_confirmation, class: "form-control" %>
-      </div>
-      <%= f.submit "Sign up", class: "btn btn-primary" %>
-    <% end %>
+    </div>
   </div>
 </div>

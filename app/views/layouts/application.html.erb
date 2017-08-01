@@ -11,15 +11,8 @@
   <body>
     <%= render 'layouts/header' %>
     <div id="application-container" class="container">
-      <div class="row">
-        <div class="col-md-8">
-          <%= render 'layouts/breadcrumbs' %>
-          <%= yield %>
-        </div>
-        <div class="col-md-4">
-          <%= render 'layouts/flash' %>
-        </div>
-      </div>
+      <%= render 'layouts/breadcrumbs' %>
+      <%= yield %>
       <%= debug(params) if Rails.env.development? %>
     </div>
     <%= render 'layouts/footer' %>

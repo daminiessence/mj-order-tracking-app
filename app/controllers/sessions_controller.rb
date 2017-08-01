@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
+    add_breadcrumb "login", login_path
   end
 
   def create

@@ -13,4 +13,8 @@ class Product < ApplicationRecord
   validates :suggested_price,
     numericality: { greater_than_or_equal_to: 0.0 }
 
+  def formatted_suggested_price
+    'RM %.2f' % [ suggested_price ]
+  end
+
 end

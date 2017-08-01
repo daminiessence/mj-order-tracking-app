@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
   before_action :correct_user, only: [ :edit, :update ]
 
-  add_breadcrumb "users", :users_path
+  # add_breadcrumb "users", :users_path
 
   def index
     @users = User.all
