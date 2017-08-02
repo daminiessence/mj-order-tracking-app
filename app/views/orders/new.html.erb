@@ -1,76 +1,84 @@
 <% provide(:title, "New | Orders") %>
+
 <%= form_for @order do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="panel panel-default">
-    <div class="panel-heading"><h3 class="panel-title">New Order</h3></div>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-            <%= f.label :no, "No." %>
-            <%= f.number_field :no, class: "form-control",
-              step: 1, min: 0 %>
-          </div>
-          <%= f.submit "Create", class: "btn btn-success" %>
-          <br>
-          <br>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">New order</h3>
         </div>
-        <div class="col-md-8">
-          <p>Add order sales info by clicking on the <strong>+</strong> button below. The
-            <strong>Sale Price</strong> is optional, the product standard price will be used by
-            default.</p>
-          <p>
-            For custom values, make sure you enter in the <strong>price per product.</strong>
-          </p>
+        <div class="panel-body">
+          <div class="form-group">
+            <%= f.number_field :no, class: "form-control",
+              step: 1, min: 0,
+              placeholder: "Order no." %>
+          </div>
+          <%= f.submit "Create", class: "btn btn-primary" %>
         </div>
       </div>
     </div>
-    <table class="table">
-      <col width="auto">
-      <col width="80px">
-      <col width="120px">
-      <col width="7px">
-      <tr>
-        <th>Product</th>
-        <th>*</th>
-        <th>Sale Price (RM)</th>
-        <th>
-          <%= f.add_nested_fields_link :sales, "+",
-            role: "button",
-            style: "text-decoration: none;" %>
-        </th>
-      </tr>
-      <%= f.nested_fields_for :sales, wrapper_tag: :tr do |sf| %>
-        <td>
-          <div class="form-group">
-            <%= sf.select(:product_sid, options_for_select(@products, sf.object.product_sid), {},
-              class: "form-control") %>
-          </div>
-        </td>
-        <td>
-          <div class="form-group">
-            <%= sf.number_field :amount,
-              value: 1, min: 1, max: 99, step: 1,
-              class: "form-control",
-              pattern: "[0-9]*",
-              inputmode: "numeric" %>
-          </div>
-        </td>
-        <td>
-          <div class="form-group">
-            <%= sf.number_field :sale_price,
-              min: 0.01, max: 9999.99, step: 0.01,
-              class: "form-control",
-              pattern: "[0-9]*",
-              inputmode: "numeric" %>
-          </div>
-        </td>
-        <td>
-          <%= sf.remove_nested_fields_link "x", role: "button",
-            class: "text-danger",
-            style: "text-decoration: none;" %>
-        </td>
-      <% end %>
-    </table>
+
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Order details</h3>
+        </div>
+        <div class="panel-body">
+          <%= f.add_nested_fields_link :sales, "Add",
+            class: "btn btn-default",
+            role: "button" %>
+        </div>
+        <table class="table">
+          <col width="auto">
+          <col width="80px">
+          <col width="120px">
+          <col width="35px">
+          <tr>
+            <th></th>
+            <th>Amount</th>
+            <th>Sale Price (RM)</th>
+            <th></th>
+          </tr>
+          <%= f.nested_fields_for :sales, wrapper_tag: :tr do |sf| %>
+            <td>
+              <div class="form-group">
+                <%= sf.select(:product_sid,
+                  options_for_select(@products, sf.object.product_sid),
+                  {},
+                  class: "form-control") %>
+              </div>
+            </td>
+
+            <td>
+              <div class="form-group">
+                <%= sf.number_field :amount,
+                  value: 1, min: 1, max: 99, step: 1,
+                  class: "form-control",
+                  pattern: "[0-9]*",
+                  inputmode: "numeric" %>
+              </div>
+            </td>
+
+            <td>
+              <div class="form-group">
+                <%= sf.number_field :sale_price,
+                  min: 0.01, max: 9999.99, step: 0.01,
+                  class: "form-control",
+                  pattern: "[0-9]*",
+                  inputmode: "numeric" %>
+              </div>
+            </td>
+
+            <td>
+              <%= sf.remove_nested_fields_link "X", role: "button",
+                class: "text-danger",
+                style: "text-decoration: none;" %>
+            </td>
+          <% end %>
+        </table>
+      </div>
+    </div>
   </div>
 <% end %>

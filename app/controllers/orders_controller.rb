@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
   add_breadcrumb "orders", :orders_path
 
   def index
-    flash[:success] = "TODO: test"
     @orders = Order.where(agent_id: current_user.agent_id) || []
   end
 
@@ -34,6 +33,7 @@ class OrdersController < ApplicationController
       redirect_to orders_url
     else
       @products = product_selection
+      add_breadcrumb "new"
       render :new
     end
   end
@@ -54,7 +54,7 @@ class OrdersController < ApplicationController
       p_selection = []
       Product.all.each do |product|
         p_selection << [
-          "#{product.name} (ID: #{product.sid}, RM #{product.suggested_price})",
+          "#{product.name} (ID: #{product.sid}, #{product.formatted_suggested_price})",
           product.sid
         ]
       end

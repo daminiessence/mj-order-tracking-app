@@ -19,4 +19,7 @@ class Sale < ApplicationRecord
     format: { with: VALID_AMOUNT_REGEX },
     numericality: { only_integer: true }
 
+  def formatted_sale_price
+    'RM %.2f' % [ sale_price ]
+  end
 end

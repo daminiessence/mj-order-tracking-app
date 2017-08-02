@@ -1,12 +1,20 @@
+<script type="text/javascript">
+  $(function() {
+     $('#errors').hide().delay(500).fadeIn('normal', function() {
+        $(this).delay(25000).fadeOut();
+     });
+  });
+</script>
+
 <% if object.errors.any? %>
-  <div id="error_explanation">
+  <div id="errors">
     <div class="alert alert-danger">
-      The form contains <%= pluralize(object.errors.count, "error") %>.
+      The form contains <%= pluralize(object.errors.count, "error") %>:
+      <ul>
+        <% object.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
     </div>
-    <ul>
-    <% object.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
   </div>
 <% end %>

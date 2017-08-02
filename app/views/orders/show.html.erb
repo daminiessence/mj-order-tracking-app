@@ -1,45 +1,53 @@
+<% provide(:title, "#{@order.formatted_no} | Orders") %>
+
 <div class="row">
   <div class="col-md-12">
-    <h1>Order #<%= @order.no %></h1>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <p>
-          <strong>Agent ID: </strong>
-          <%= link_to @user.agent_id, user_path(@user) %>
-        </p>
-        <p>
-          <strong>Agent name: </strong>
-          <%= link_to "#{@user.first_name} #{@user.last_name}", user_path(@user) %>
-        </p>
-        <p>
-          <strong># of sales: </strong>
-          <%= link_to @sales.count, '#' %>
-        </p>
-        <p>
-          <strong>Sales amount: </strong>
-          <%= link_to "RM #{@order.sales.sum(&:sale)}", '#' %>
-        </p>
-      </div>
-      <table class="table">
-        <tr>
-          <th>Product ID</th>
-          <th>Product Name</th>
-          <th>Suggested Price</th>
-          <th>Sale Price</th>
-          <th>Price %</th>
-        </tr>
-        <% @sales.each do |sale| %>
+
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h3 class="panel-title">Order <%= @order.formatted_no %></h3>
+        </div>
+
+        <div class="panel-body">
+          <p>
+            <strong>Agent ID: </strong>
+            <%= link_to @user.agent_id, user_path(@user) %>
+          </p>
+          <p>
+            <strong>Agent name: </strong>
+            <%= link_to "#{@user.first_name} #{@user.last_name}", user_path(@user) %>
+          </p>
+          <p>
+            <strong>Number of sales: </strong>
+            <%= @sales.count %>
+          </p>
+          <p>
+            <strong>Sales amount: </strong>
+            <%= "RM #{@order.sales.sum(&:sale_price)}" %>
+          </p>
+        </div>
+
+        <table class="table">
           <tr>
-            <% s = sale[0] %>
-            <% p = sale[1] %>
-            <td><%= link_to p.id, product_path(p) %></td>
-            <td><%= link_to p.name, product_path(p) %></td>
-            <td><%= link_to "RM #{p.suggested_price}", product_path(p) %></td>
-            <td><%= s.sale %></td>
-            <td><%= (s.sale / p.suggested_price) * 100 %>%</td>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Suggested Price</th>
+            <th>Sale Price</th>
+            <th>Price %</th>
           </tr>
-        <% end %>
-      </table>
-    </div>
+          <% @sales.each do |sale| %>
+            <tr>
+              <% s = sale[0] %>
+              <% p = sale[1] %>
+              <td><%= link_to p.id, product_path(p) %></td>
+              <td><%= link_to p.name, product_path(p) %></td>
+              <td><%= link_to p.formatted_suggested_price, product_path(p) %></td>
+              <td><%= s.sale_price %></td>
+              <td><%= (s.sale_price / p.suggested_price) * 100 %>%</td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
   </div>
 </div>
