@@ -17,5 +17,5 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
-//= require_tree .
 //= require nested_form_fields
+//= require_tree .
